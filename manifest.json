@@ -7,5 +7,5 @@
         "https://formit3d.github.io/FormItExamplePlugins/SharedPluginFiles/PluginUtils.js"
     ]
     ,"Panel": "PLUGINLOCATION/index.html",
-    "PanelIcon": "PLUGINLOCATION/IMG/generate_vertex@2x.png"
+    "PanelIcon": "PLUGINLOCATION/img/generate_vertex@2x.png"
 }
