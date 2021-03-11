@@ -10,8 +10,6 @@ let ZCoordinateInputID = 'ZCoordinateInput';
 
 GenerateVertex.initializeUI = function()
 {
-    debugger;
-    
     // create an overall container for all objects that comprise the "content" of the plugin
     // everything except the footer
     var contentContainer = document.createElement('div');
