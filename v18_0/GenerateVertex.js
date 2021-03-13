@@ -3,7 +3,9 @@ if (typeof GenerateVertex == 'undefined')
     GenerateVertex = {};
 }
 
-// IDs for inputs whose values need to be updated
+/*** web/UI code - runs natively in the plugin process ***/
+
+// IDs input elements that need to be referenced or updated
 let XCoordinateInputID = 'XCoordinateInput';
 let YCoordinateInputID = 'YCoordinateInput';
 let ZCoordinateInputID = 'ZCoordinateInput';
@@ -12,7 +14,7 @@ GenerateVertex.initializeUI = function()
 {
     // create an overall container for all objects that comprise the "content" of the plugin
     // everything except the footer
-    var contentContainer = document.createElement('div');
+    let contentContainer = document.createElement('div');
     contentContainer.id = 'contentContainer';
     contentContainer.className = 'contentContainer'
     window.document.body.appendChild(contentContainer);
@@ -33,7 +35,7 @@ GenerateVertex.initializeUI = function()
     document.getElementById(ZCoordinateInputID).value = 0;
 
     // create the button to execute the generation
-    contentContainer.appendChild(new FormIt.PluginUI.Button('Generate Vertex', GenerateVertex.CreateVertex).element)
+    contentContainer.appendChild(new FormIt.PluginUI.Button('Generate Vertex', GenerateVertex.CreateVertex).element);
 
     // create the footer
     document.body.appendChild(new FormIt.PluginUI.FooterModule().element);
@@ -67,6 +69,8 @@ GenerateVertex.updateUI = function()
             document.getElementById(ZCoordinateInputID).value = JSON.parse(result);
         });
 }
+
+/*** application code - runs asynchronously from plugin process to communicate with FormIt ***/
 
 // generate the vertex in 3D space
 GenerateVertex.CreateVertex = async function()
