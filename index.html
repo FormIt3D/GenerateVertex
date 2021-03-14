@@ -1,32 +1,51 @@
 <html>
-<head><link rel="stylesheet" type="text/css" href="stylesheet.css"/>
-<title>Generate Vertex</title>
-<META NAME="Title" CONTENT="Generate Vertex">
-<META NAME="Author" CONTENT="Autodesk FormIt">
-<script type="text/javascript" src="https://formit3d.github.io/FormItExamplePlugins/SharedPluginFiles/FormItInterface.js"></script>
-<script type="text/javascript" src="https://formit3d.github.io/FormItExamplePlugins/SharedPluginFiles/PluginUtils.js"></script>
-<script type="text/javascript" src="GenerateVertex.js"></script>
-<script type="text/javascript">
-    FormItInterface.Initialize();
-</script>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://formit3d.github.io/FormItExamplePlugins/SharedPluginFiles/FormItPluginStyling.css">
+    <title>Dynamo Eyedropper</title>
+    <META NAME="Title" CONTENT="Dynamo Eyedropper">
+    <META NAME="Author" CONTENT="Autodesk FormIt">
+        <script type="text/javascript" src="https://formit3d.github.io/FormItExamplePlugins/SharedPluginFiles/FormIt.js"></script>
+        <script type="text/javascript" src="https://formit3d.github.io/FormItExamplePlugins/SharedPluginFiles/FormItInterface.js"></script>
+        <script type="text/javascript" src="https://formit3d.github.io/FormItExamplePlugins/SharedPluginFiles/PluginUtils18_0.js"></script>
+        <script type="text/javascript" src="https://formit3d.github.io/FormItExamplePlugins/SharedPluginFiles/FormItPluginUI.js"></script>
+        <script type="text/javascript" src="https://formit3d.github.io/PropertiesPlus/PropertiesPlus_Client.js"></script>
+        <script type="text/javascript" src="DynamoEyedropper.js"></script>
+        <script type="text/javascript">
+        FormItInterface.Initialize(function () {
+
+            // subscribe to the message sent when units are changed
+            FormItInterface.SubscribeMessage("FormIt.Message.kSelectionsChanged", function(msg)
+            {
+                var jsonMessage = JSON.parse(msg);
+
+                if (bIsSelectionForMatchInProgress)
+                {
+                    // when the FormIt selection changes, automatically update the plugin UI
+                    DynamoEyedropper.updateUIForMatchObject();
+
+                    bIsSelectionForMatchInProgress = false;
+                }
+
+                if (bIsSelectionForChangeInProgress)
+                {
+                    // when the FormIt selection changes, automatically update the plugin UI
+                    DynamoEyedropper.updateUIForChangeObject();
+
+                    bIsSelectionForChangeInProgress = false;
+                }
+
+                //DynamoEyedropper.updateUI();
+            });
+
+            // initialize the UI
+            // this must be called from here, to ensure the HTML page is loaded
+            // before scripts try to access the window document
+            DynamoEyedropper.initializeUI();
+
+        }); // DOMContentLoaded
+    </script>
 </head>
 <body>
-<h1>Generate Vertex</h1>
-
-<p>Generate a standalone vertex at the given XYZ coordinates.</p>
-
-<div id="GenerateVertexForm">
-    <form name=a>
-        <input type=number name=X value = 0> X Coordinate<br>
-        <input type=number name=Y value = 0> Y Coordinate<br>
-        <input type=number name=Z value = 0> Z Coordinate<br>
-    <input id="GenerateVertexBtn" type=button value="Generate Vertex" onClick="DSGenerateVertex.Submit();">
-</form>
-</div>
-
-<script>
-    FormIt.PluginUtils.HandleEnter("GenerateVertexForm", "GenerateVertexBtn");
-</script>
 
 </body>
 </html>
