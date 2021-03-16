@@ -10,20 +10,20 @@
         <script type="text/javascript" src="https://formit3d.github.io/FormItExamplePlugins/SharedPluginFiles/FormItPluginUI.js"></script>
         <script type="text/javascript" src="GenerateVertex.js"></script>
         <script type="text/javascript">
-        FormItInterface.Initialize(function () {
+        FormItInterface.Initialize(async function () {
 
             // subscribe to the message sent when units are changed
-            FormItInterface.SubscribeMessage("FormIt.Message.kUnitTypeChanged", function(msg)
+            FormItInterface.SubscribeMessage("FormIt.Message.kUnitTypeChanged", async function(msg)
             {
                 var jsonMessage = JSON.parse(msg);
-                GenerateVertex.updateUI();
+                await GenerateVertex.updateUI();
             });
 
             // initialize the UI
             // this must be called from here, to ensure the HTML page is loaded
             // before scripts try to access the window document
-            GenerateVertex.initializeUI();
-            GenerateVertex.updateUI();
+            await GenerateVertex.initializeUI();
+            await GenerateVertex.updateUI();
 
         }); // DOMContentLoaded
     </script>
