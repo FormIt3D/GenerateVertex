@@ -5,7 +5,7 @@ if (typeof GenerateVertex == 'undefined')
 
 /*** web/UI code - runs natively in the plugin process ***/
 
-// IDs input elements that need to be referenced or updated
+// IDs of input elements that need to be referenced or updated
 let XCoordinateInputID = 'XCoordinateInput';
 let YCoordinateInputID = 'YCoordinateInput';
 let ZCoordinateInputID = 'ZCoordinateInput';
